@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ball
+  - Bricks
+  - Environment
+  - Paddle
   layers:
   - Default
   - TransparentFX

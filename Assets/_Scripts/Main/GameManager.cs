@@ -27,6 +27,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         ballRb.linearVelocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
         ballRb.isKinematic = true;
+        ballRb.interpolation = RigidbodyInterpolation.None;
         ball.transform.parent = ballAnchor;
         ball.transform.localPosition = Vector3.zero;
         ball.transform.rotation = Quaternion.identity;
@@ -39,6 +40,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         ball.transform.parent = null;
         ballRb.isKinematic = false;
         ballRb.AddForce(ball.transform.forward * ballLaunchSpeed, ForceMode.Impulse);
+        ballRb.interpolation = RigidbodyInterpolation.Interpolate;
         isBallActive = true;
     }
 

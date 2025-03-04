@@ -12,7 +12,7 @@ public class Brick : MonoBehaviour
 
     private IEnumerator DestroyWithDelay()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 }
