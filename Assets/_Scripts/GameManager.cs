@@ -6,6 +6,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField] private GameObject ball;
     [SerializeField] private Transform ballAnchor;
     [SerializeField] private float ballLaunchSpeed;
+    [SerializeField] private Transform bricksContainer;
 
     private Rigidbody ballRb;
     private bool isBallActive;
@@ -50,6 +51,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         // fire audio here
         // implement particle effect here
         // add camera shake here
+        if(bricksContainer.childCount <= 0) SceneHandler.Instance.LoadNextScene();
     }
 
     public void KillBall()

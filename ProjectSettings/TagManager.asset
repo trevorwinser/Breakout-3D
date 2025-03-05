@@ -8,6 +8,7 @@ TagManager:
   - Bricks
   - Environment
   - Paddle
+  - TransitionCanvas
   layers:
   - Default
   - TransparentFX
