@@ -14,24 +14,26 @@ public class SceneHandler : SingletonMonoBehavior<SceneHandler>
     [SerializeField] private float animationDuration;
     [Header("Temp")]
     [SerializeField] private int nextLevelIndex = 0;
-    [SerializeField] private Transform transitionCanvas;
+    [SerializeField] private RectTransform transitionCanvas;
+
+    private float initXPosition;
 
     protected override void Awake()
     {
         base.Awake();
-        transitionCanvas = GameObject.FindGameObjectsWithTag("TransitionCanvas")[0].transform;
+        initXPosition = transitionCanvas.transform.localPosition.x;
         SceneManager.sceneLoaded += OnSceneLoad;
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode _)
     {
-        transitionCanvas = GameObject.FindGameObjectsWithTag("TransitionCanvas")[0].transform;
-        transitionCanvas.DOLocalMoveX(-1920f, animationDuration).SetEase(animationType);
+        transitionCanvas.DOLocalMoveX(initXPosition, animationDuration).SetEase(animationType);
     }
 
     public void LoadNextScene()
     {
-        transitionCanvas.DOLocalMoveX(0f, animationDuration).SetEase(animationType);
+        if(nextLevelIndex >= levels.Count) ExitToMenu();
+        transitionCanvas.DOLocalMoveX(initXPosition + transitionCanvas.rect.width, animationDuration).SetEase(animationType);
         StartCoroutine(LoadSceneAfterTransition(levels[nextLevelIndex]));
     }
 

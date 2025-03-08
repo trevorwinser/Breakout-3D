@@ -10,12 +10,14 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     private Rigidbody ballRb;
     private bool isBallActive;
+    private int currentBrickCount;
 
     private void OnEnable()
     {
         ballRb = ball.GetComponent<Rigidbody>();
         InputHandler.Instance.OnFire.AddListener(FireBall);
         ResetBall();
+        currentBrickCount = bricksContainer.childCount;
     }
 
     private void OnDisable()
@@ -51,7 +53,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         // fire audio here
         // implement particle effect here
         // add camera shake here
-        if(bricksContainer.childCount <= 0) SceneHandler.Instance.LoadNextScene();
+        currentBrickCount--;
+        if(currentBrickCount <= 0) SceneHandler.Instance.LoadNextScene();
     }
 
     public void KillBall()
