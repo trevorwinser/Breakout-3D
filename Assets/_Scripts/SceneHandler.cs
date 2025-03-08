@@ -12,16 +12,16 @@ public class SceneHandler : SingletonMonoBehavior<SceneHandler>
     [Header("Transition Animation Data")]
     [SerializeField] private Ease animationType;
     [SerializeField] private float animationDuration;
-    [Header("Temp")]
-    [SerializeField] private int nextLevelIndex = 0;
     [SerializeField] private RectTransform transitionCanvas;
 
+    private int nextLevelIndex;
     private float initXPosition;
 
     protected override void Awake()
     {
         base.Awake();
         initXPosition = transitionCanvas.transform.localPosition.x;
+        SceneManager.LoadScene(menuScene);
         SceneManager.sceneLoaded += OnSceneLoad;
     }
 
@@ -32,30 +32,28 @@ public class SceneHandler : SingletonMonoBehavior<SceneHandler>
 
     public void LoadNextScene()
     {
-        if(nextLevelIndex >= levels.Count) ExitToMenu();
+        if(nextLevelIndex >= levels.Count)
+        {
+            LoadMenuScene();
+        }
+        else
+        {
+            transitionCanvas.DOLocalMoveX(initXPosition + transitionCanvas.rect.width, animationDuration).SetEase(animationType);
+            StartCoroutine(LoadSceneAfterTransition(levels[nextLevelIndex]));
+            nextLevelIndex++;
+        }
+    }
+
+    public void LoadMenuScene()
+    {
         transitionCanvas.DOLocalMoveX(initXPosition + transitionCanvas.rect.width, animationDuration).SetEase(animationType);
-        StartCoroutine(LoadSceneAfterTransition(levels[nextLevelIndex]));
-    }
-
-    public void ExitToMenu()
-    {
-        transitionCanvas.DOMoveX(0f, animationDuration).SetEase(animationType);
         StartCoroutine(LoadSceneAfterTransition(menuScene));
-    }
-
-    public void ExitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        nextLevelIndex = 0;
     }
 
     private IEnumerator LoadSceneAfterTransition(string scene)
     {
         yield return new WaitForSeconds(animationDuration);
-        nextLevelIndex++;
         SceneManager.LoadScene(scene);
     }
 }

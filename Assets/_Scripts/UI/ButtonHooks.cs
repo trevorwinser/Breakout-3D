@@ -9,11 +9,6 @@ public class ButtonHooks : MonoBehaviour
 
     public void ExitToMenu()
     {
-        SceneHandler.Instance.ExitToMenu();
-    }
-
-    public void ExitGame()
-    {
-        SceneHandler.Instance.ExitGame();
+        SceneHandler.Instance.LoadMenuScene();
     }
 }
