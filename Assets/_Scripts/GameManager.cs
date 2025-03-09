@@ -11,12 +11,14 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     private Rigidbody ballRb;
     private bool isBallActive;
     private int currentBrickCount;
+    private int totalBrickCount;
 
     private void OnEnable()
     {
         ballRb = ball.GetComponent<Rigidbody>();
         InputHandler.Instance.OnFire.AddListener(FireBall);
         ResetBall();
+        totalBrickCount = bricksContainer.childCount;
         currentBrickCount = bricksContainer.childCount;
     }
 
@@ -49,19 +51,19 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     public void BrickDestroyed(Vector3 position)
     {
-        Debug.Log(position);
         // fire audio here
         // implement particle effect here
         // add camera shake here
         currentBrickCount--;
-        if(currentBrickCount <= 0) SceneHandler.Instance.LoadNextScene();
+        Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
+        if(currentBrickCount == 0) SceneHandler.Instance.LoadNextScene();
     }
 
     public void KillBall()
     {
         maxLives--;
-        // update UI here
-        // check game over if maxLives < 0
+        // update lives on HUD here
+        // game over UI if maxLives < 0, then exit to main menu after delay
         ResetBall();
     }
 }

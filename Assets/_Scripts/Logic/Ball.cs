@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Bricks") || other.gameObject.CompareTag("Paddle"))
+        if(other.gameObject.CompareTag("Paddle"))
         {
             Vector3 directionToFire = (transform.position - other.transform.position).normalized;
             float angleOfContact = Vector3.Angle(transform.forward, directionToFire);

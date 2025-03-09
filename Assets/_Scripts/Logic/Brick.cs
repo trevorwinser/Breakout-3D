@@ -3,16 +3,19 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
+    private Coroutine destroyRoutine = null;
+
     private void OnCollisionEnter(Collision other)
     {
+        if (destroyRoutine != null) return;
         if (!other.gameObject.CompareTag("Ball")) return;
-        GameManager.Instance.BrickDestroyed(transform.position);
-        StartCoroutine(DestroyWithDelay());
+        destroyRoutine = StartCoroutine(DestroyWithDelay());
     }
 
     private IEnumerator DestroyWithDelay()
     {
         yield return new WaitForSeconds(0.1f); // two physics frames to ensure proper collision
+        GameManager.Instance.BrickDestroyed(transform.position);
         Destroy(gameObject);
     }
 }
