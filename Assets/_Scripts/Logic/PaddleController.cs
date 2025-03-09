@@ -2,7 +2,6 @@
 
 public class PaddleController : MonoBehaviour
 {
-    [SerializeField] private GameObject ball;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float minBallBounceBackSpeed;
     [SerializeField] private float maxBallBounceBackSpeed;
