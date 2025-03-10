@@ -12,11 +12,6 @@ public class Ball : MonoBehaviour
 
     private bool isBallActive;
 
-    private void OnEnable()
-    {
-        ResetBall();
-    }
-
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.CompareTag("Paddle"))
