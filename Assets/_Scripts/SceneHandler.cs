@@ -56,4 +56,9 @@ public class SceneHandler : SingletonMonoBehavior<SceneHandler>
         yield return new WaitForSeconds(animationDuration);
         SceneManager.LoadScene(scene);
     }
+    public void LoadSpecificScene(string sceneName)
+{
+    transitionCanvas.DOLocalMoveX(initXPosition + transitionCanvas.rect.width, animationDuration).SetEase(animationType);
+    StartCoroutine(LoadSceneAfterTransition(sceneName));
+}
 }
