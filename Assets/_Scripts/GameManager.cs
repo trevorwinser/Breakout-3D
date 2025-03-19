@@ -58,10 +58,12 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         // game over UI if maxLives < 1, then exit to main menu after delay
         if (maxLives <= 0)
         {
+            CameraShake.Shake(1, 10);
             SceneHandler.Instance.LoadMenuScene();
         }
         else
         {
+            CameraShake.Shake(1, 1);
             ball.ResetBall();
         }
     }
