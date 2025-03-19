@@ -58,8 +58,12 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         // game over UI if maxLives < 1, then exit to main menu after delay
         if (maxLives <= 0)
         {
+            // Save the final score before switching to GameOver scene
+            PlayerPrefs.SetInt("PlayerScore", score);
+            PlayerPrefs.Save();
+
             CameraShake.Shake(1, 10);
-            SceneHandler.Instance.LoadMenuScene();
+            SceneHandler.Instance.LoadSpecificScene("GameOver");
         }
         else
         {

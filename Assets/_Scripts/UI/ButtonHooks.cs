@@ -11,4 +11,8 @@ public class ButtonHooks : MonoBehaviour
     {
         SceneHandler.Instance.LoadMenuScene();
     }
+    public void LoadSpecificScene(string sceneName)
+    {
+        SceneHandler.Instance.LoadSpecificScene(sceneName);
+    }
 }
