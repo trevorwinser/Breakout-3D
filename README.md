@@ -1,6 +1,6 @@
 # Studio 5
 
-## Our Demo
+## Demo
 [Click to view](https://youtu.be/3w9otaCSlag)
 
 ## Link to Our Game
