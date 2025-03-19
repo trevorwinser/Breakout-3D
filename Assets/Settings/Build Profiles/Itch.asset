@@ -28,6 +28,8 @@ MonoBehaviour:
     m_path: Assets/_Scenes/Level 1.unity
   - m_enabled: 1
     m_path: Assets/_Scenes/Level 2.unity
+  - m_enabled: 1
+    m_path: Assets/_Scenes/GameOver.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
@@ -1004,8 +1006,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 2586905889502920704
       type: {class: WebGLPlatformSettings, ns: UnityEditor.WebGL, asm: UnityEditor.WebGL.Extensions}
       data:
